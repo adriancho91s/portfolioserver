@@ -1,0 +1,29 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server for Adrian Gaitan Portfolio",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adriancho91s/portfolioserver.git"
+  },
+  "keywords": [
+    "Server"
+  ],
+  "author": "Adrián Fernando Gaitán Londoño",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adriancho91s/portfolioserver/issues"
+  },
+  "homepage": "https://github.com/adriancho91s/portfolioserver#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
+  }
+}
