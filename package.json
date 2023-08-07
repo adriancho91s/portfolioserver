@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/adriancho91s/portfolioserver#readme",
   "dependencies": {
+    "@notionhq/client": "^2.2.10",
     "axios": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
