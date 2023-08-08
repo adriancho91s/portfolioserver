@@ -19,6 +19,7 @@ notionRouter.get("/projects", async (req, res) => {
 
         const projects = response.results.map((project) => {
             const {
+                id,
                 properties: {
                     description,
                     cover,
@@ -30,6 +31,7 @@ notionRouter.get("/projects", async (req, res) => {
             } = project;
 
             const projectData = {
+                id,
                 title: title.title[0]?.plain_text || "Untitled",
                 url,
             };
