@@ -29,7 +29,7 @@ notionRouter.get("/projects", async (req, res) => {
                 },
                 url,
             } = project;
-
+ 
             const projectData = {
                 id,
                 title: title.title[0]?.plain_text || "Untitled",
