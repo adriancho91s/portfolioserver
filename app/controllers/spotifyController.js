@@ -20,6 +20,7 @@ const getAccessToken = async () => {
         `${client_id}:${client_secret}`
       ).toString("base64")}`,
     },
+    cache: "no-cache",
   };
 
   const response = await axios(authOptions);
