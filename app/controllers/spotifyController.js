@@ -26,8 +26,5 @@ const getAccessToken = async () => {
   return response.data.access_token;
 };
 
-const token = {
-    token: await getAccessToken()
-};
 
-export default token;
+export default getAccessToken;

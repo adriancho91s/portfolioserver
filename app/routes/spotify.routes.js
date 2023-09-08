@@ -1,10 +1,13 @@
 import express from "express";
-import token from "../controllers/spotifyController.js";
+import getAccessToken from "../controllers/spotifyController.js";
 
 const spotifyRouter = express.Router();
 
 
 spotifyRouter.get("/token", async (req, res) => {
+    const token = {
+        token: await getAccessToken()
+    };
     res.json(token);
 });
 
