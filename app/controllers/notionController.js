@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-// Initializing a client
+// Initializing a NOTION client
 const notion = new Client({
     auth: process.env.NOTION_TOKEN,
   })

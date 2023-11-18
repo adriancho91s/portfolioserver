@@ -4,6 +4,10 @@ import axios from "axios";
 
 const spotifyRouter = express.Router();
 
+spotifyRouter.get("/", (req, res) => {
+    res.send("Spotify service");
+});
+
 spotifyRouter.get("/onRepeat", async (req, res) => {
     try {
         const token = await getAccessToken();

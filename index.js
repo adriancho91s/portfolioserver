@@ -13,10 +13,10 @@ app.use(cors());
 app.use('/api', router);
 
 app.get('/', (req, res) => {
-    res.send('API is running...');
+    res.send('Hello world!, this is my personal API');
     } 
 );
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}.`);
+    console.log(`Portfolio API is running on port ${PORT}.`);
 });
