@@ -63,4 +63,56 @@ notionRouter.get("/projects", async (req, res) => {
 });
 
 
+notionRouter.get("/notes", async (req, res) => {
+    try {
+        const databaseId = process.env.NOTION_NOTES_DATABASE_ID;
+        const response = await notion.databases.query({
+            database_id: databaseId,
+        });
+
+        const notes = response.results.map((note) => {
+            const {
+                id,
+                properties: {
+                    description,
+                    cover,
+                    category,
+                    colorCard,
+                    title,
+                },
+                url,
+            } = note;
+ 
+            const noteData = {
+                id,
+                title: title.title[0]?.plain_text || "Untitled",
+                url,
+            };
+
+            if (description.rich_text.length > 0) {
+                noteData.description = description.rich_text[0].plain_text;
+            }
+
+            if (cover && cover.files.length > 0) {
+                noteData.coverUrl = cover.files[0].file.url;
+            }
+
+            if (category.multi_select.length > 0) {
+                noteData.categories = category.multi_select.map((option) => option.name);
+            }
+
+            if (colorCard.rich_text.length > 0) {
+                noteData.colorCard = colorCard.rich_text[0].plain_text;
+            }
+
+            return noteData;
+        }).filter(note => note.description || note.coverUrl || note.categories || note.colorCard);
+
+        res.json(notes);
+    } catch (error) {
+        console.error("Error fetching notes:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
 export default notionRouter;
