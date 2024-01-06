@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "portfolio-server",
   "version": "1.0.0",
   "description": "Server for Adrian Gaitan Portfolio",
   "main": "index.js",
