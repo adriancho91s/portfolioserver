@@ -1,5 +1,5 @@
 import express from "express";
-import getAccessToken from "../controllers/spotifyController.js";
+import getAccessToken from "@controllers/spotifyController.ts";
 import axios from "axios";
 
 const spotifyRouter = express.Router();
@@ -20,8 +20,8 @@ spotifyRouter.get("/onRepeat", async (req, res) => {
             }
         );
         res.send(responsePlaylist.data);
-    } catch (error) {
-        res.status(500).send({ error: error.message });
+    } catch (error: any) {
+        res.status(500).send({ error: error.message as unknown as string});
     }
 });
 
