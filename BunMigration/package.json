@@ -1,20 +1,5 @@
 {
   "name": "portfolio-server",
-  "version": "1.0.0",
-  "description": "Server for Adrian Gaitan Portfolio",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/adriancho91s/portfolioserver.git"
-  },
-  "keywords": [
-    "Server"
-  ],
-  "author": "Adrián Fernando Gaitán Londoño",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/adriancho91s/portfolioserver/issues"
-  },
-  "homepage": "https://github.com/adriancho91s/portfolioserver#readme",
   "module": "index.ts",
   "type": "module",
   "devDependencies": {

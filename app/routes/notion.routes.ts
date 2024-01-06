@@ -1,10 +1,9 @@
-import express, { response } from "express";
+import express from "express";
+import { Project, ProjectData } from "@customTypes/notionTypes.ts";
 
-import notion from "../controllers/notionController.js";
+import notion from "@controllers/notionController.ts";
 
 const notionRouter = express.Router();
-
-
 
 notionRouter.get("/", (req, res) => {
     res.send("Notion API integration");
@@ -14,7 +13,7 @@ notionRouter.get("/projects", async (req, res) => {
     try {
         const databaseId = process.env.NOTION_PROJECTS_DATABASE_ID;
         const response = await notion.databases.query({
-            database_id: databaseId,
+            database_id: databaseId!,
         });
 
         const projects = response.results.map((project) => {
@@ -28,9 +27,9 @@ notionRouter.get("/projects", async (req, res) => {
                     title,
                 },
                 url,
-            } = project;
+            } = project as unknown as Project;
  
-            const projectData = {
+            const projectData: ProjectData = {
                 id,
                 title: title.title[0]?.plain_text || "Untitled",
                 url,

@@ -1,6 +1,6 @@
 import express  from "express";
-import spotifyRouter from "./spotify.routes.js";
-import notionRouter from "./notion.routes.js";
+import spotifyRouter from "./spotify.routes.ts";
+import notionRouter from "./notion.routes.ts";
 
 const router = express.Router();
 
