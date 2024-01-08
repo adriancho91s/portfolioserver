@@ -1,0 +1,21 @@
+name: Lint & Build
+on: [push]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: bun/bun-action@v1
+        with:
+          bun-version: 1.x
+      - run: bun install
+      - run: bun lint
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: bun/bun-action@v1
+        with:
+          bun-version: 1.x
+      - run: bun install
+      - run: bun build

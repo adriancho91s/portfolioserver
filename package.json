@@ -17,6 +17,10 @@
   "homepage": "https://github.com/adriancho91s/portfolioserver#readme",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "start": "bun index.ts",
+    "dev": "bun --watch index.ts"
+  },
   "devDependencies": {
     "@flydotio/dockerfile": "latest",
     "@types/bun": "latest"
