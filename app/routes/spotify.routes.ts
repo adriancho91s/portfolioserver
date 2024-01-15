@@ -5,7 +5,9 @@ import axios from "axios";
 const spotifyRouter = express.Router();
 
 spotifyRouter.get("/", (req, res) => {
-    res.send("Spotify service");
+    res.send({
+        msg: "Spotify service API integration"
+    });
 });
 
 spotifyRouter.get("/onRepeat", async (req, res) => {

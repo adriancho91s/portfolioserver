@@ -6,7 +6,10 @@ import notion from "@controllers/notionController.ts";
 const notionRouter = express.Router();
 
 notionRouter.get("/", (req, res) => {
-    res.send("Notion API integration");
+    res.json({
+        msg: "Notion API integration"
+    }
+    );
 });
 
 notionRouter.get("/projects", async (req, res) => {
@@ -15,8 +18,6 @@ notionRouter.get("/projects", async (req, res) => {
         const response = await notion.databases.query({
             database_id: databaseId!,
         });
-
-        console.log("response:", response.results);
 
         const projects = response.results.map((project) => {
             const {
@@ -58,7 +59,6 @@ notionRouter.get("/projects", async (req, res) => {
 
         res.json(projects);
     } catch (error) {
-        console.error("Error fetching projects:", error);
         res.status(500).json({ error: "Internal server error" });
     }
 });
