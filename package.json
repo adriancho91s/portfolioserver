@@ -23,7 +23,8 @@
   },
   "devDependencies": {
     "@flydotio/dockerfile": "latest",
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/node": "^20.11.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
