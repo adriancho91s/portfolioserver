@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  portfolio-server:
+    build:
+      context: .
+    image: portfolio-server:latest
+    container_name: portfolio-container
+    environment:
+      NODE_ENV: development
+    ports:
+      - "80:3000"
+    volumes:
+      - .:/app
+    networks:
+      - portfolio-net
+    command: ["bun", "--watch", "index.ts"]
+
+networks:
+  portfolio-net:
+    driver: bridge
