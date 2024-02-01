@@ -9,10 +9,17 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const whitelist = [process.env.CORS_ORIGIN, process.env.CORS_ORIGIN_AWS];
+let whitelist = [process.env.CORS_ORIGIN, process.env.CORS_ORIGIN_AWS, process.env.CORS_ORIGIN_LOCAL];
 
 app.use(cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
+        if (whitelist.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     optionsSuccessStatus: 200,
     methods: ["GET"]
 }));
