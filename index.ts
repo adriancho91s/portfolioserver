@@ -13,6 +13,9 @@ let whitelist = [process.env.CORS_ORIGIN, process.env.CORS_ORIGIN_AWS, process.e
 
 app.use(cors({
     origin: (origin, callback) => {
+        console.log(origin);
+        console.log(whitelist.includes(origin));
+        console.log(whitelist);
         if (!origin) return callback(null, true);
         if (whitelist.includes(origin)) {
             callback(null, true);
