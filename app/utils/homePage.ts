@@ -1,8 +1,11 @@
 export const homePage = `
 <head>
+    <
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    // favicon
+    <link rel="icon" type="image/png" href="https://adriangaitan.engineer/favicon.ico" />
     <title>Adrian Gaitán API Rest</title>
 </head>
 <style>
@@ -57,6 +60,11 @@ export const homePage = `
         line-height: 1.5;
     }
 
+    a {
+        text-decoration: none;
+        color: #8aa43fe8;
+    }
+
     section {
         flex: 1;
         display: flex;
@@ -65,18 +73,10 @@ export const homePage = `
         align-items: center;
     }
 
-    a {
-        text-decoration: none;
-
-    }
-
     a:hover {
-        color: #e50914;
+        color: #69df97;
     }
 
-    a:active {
-        color: #fff;
-    }
 
 </style>
 <body>
