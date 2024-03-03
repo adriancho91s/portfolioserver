@@ -18,8 +18,6 @@ notionRouter.get("/projects", async (req, res) => {
       database_id: databaseId!,
     });
 
-    console.log(response.results[0]);
-
     const projects = response.results.map((project) => {
       const {
         id,
