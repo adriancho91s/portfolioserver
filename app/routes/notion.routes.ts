@@ -6,62 +6,51 @@ import notion from "@controllers/notionController.ts";
 const notionRouter = express.Router();
 
 notionRouter.get("/", (req, res) => {
-    res.json({
-        msg: "Notion API integration"
-    }
-    );
+  res.json({
+    msg: "Notion API integration",
+  });
 });
 
 notionRouter.get("/projects", async (req, res) => {
-    try {
-        const databaseId = process.env.NOTION_PROJECTS_DATABASE_ID;
-        const response = await notion.databases.query({
-            database_id: databaseId!,
-        });
+  try {
+    const databaseId = process.env.NOTION_PROJECTS_DATABASE_ID;
+    const response = await notion.databases.query({
+      database_id: databaseId!,
+    });
 
-        const projects = response.results.map((project) => {
-            const {
-                id,
-                properties: {
-                    description,
-                    cover,
-                    category,
-                    colorCard,
-                    title,
-                },
-                url,
-            } = project as unknown as Project;
- 
-            const projectData: ProjectData = {
-                id,
-                title: title.title[0]?.plain_text || "Untitled",
-                url,
-            };
+    console.log(response.results[0]);
 
-            if (description.rich_text.length > 0) {
-                projectData.description = description.rich_text[0].plain_text;
-            }
+    const projects = response.results.map((project) => {
+      const {
+        id,
+        properties: {
+          description,
+          cover,
+          category,
+          colorCard,
+          title,
+          gitHubURL,
+        },
+      } = project as unknown as Project;
 
-            if (cover && cover.files.length > 0) {
-                projectData.coverUrl = cover.files[0].file.url;
-            }
+      const projectData: ProjectData = {
+        id,
+        title: title.title[0]?.plain_text || "Untitled",
+        githubUrl: gitHubURL.rich_text[0]?.plain_text || "",
+        description: description.rich_text[0]?.plain_text || "",
+        coverUrl: (cover && cover.files[0]?.file.url) || "",
+        categories:
+          category.multi_select || ([] as unknown as ProjectData["categories"]),
+        colorCard: colorCard.rich_text[0]?.plain_text || "",
+      };
 
-            if (category.multi_select.length > 0) {
-                projectData.categories = category.multi_select.map((option) => option.name);
-            }
+      return projectData;
+    });
 
-            if (colorCard.rich_text.length > 0) {
-                projectData.colorCard = colorCard.rich_text[0].plain_text;
-            }
-
-            return projectData;
-        }).filter(project => project.description || project.coverUrl || project.categories || project.colorCard);
-
-        res.json(projects);
-    } catch (error) {
-        res.status(500).json({ error: "Internal server error" });
-    }
+    res.json(projects);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
-
 
 export default notionRouter;
