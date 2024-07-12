@@ -11,18 +11,7 @@ const PORT = process.env.PORT || 3000;
 
 let whitelist = [process.env.CORS_ORIGIN, process.env.CORS_ORIGIN_AWS, process.env.CORS_ORIGIN_LOCAL];
 
-app.use(cors({
-    origin: (origin, callback) => {
-        if (!origin) return callback(null, true);
-        if (whitelist.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error("Not allowed by CORS"));
-        }
-    },
-    optionsSuccessStatus: 200,
-    methods: ["GET"]
-}));
+app.use(cors({origin: "*", methods: "*"}));
 
 // app.options("https://adriangaitan.engineer", cors());
 
