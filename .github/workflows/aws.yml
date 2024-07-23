@@ -34,6 +34,7 @@ jobs:
           docker build -t $IMAGE_TAG .
           docker tag $IMAGE_TAG:latest $REGISTRY/$REGISTRY_ALIAS/$IMAGE_TAG:latest
           docker push $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:latest
+
   deploy:
     name: Deploy the new Docker image to ECS
     runs-on: ubuntu-latest
@@ -45,6 +46,15 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-central-1
+
+      - name: Register new task definition
+        run: |
+          TASK_DEFINITION_JSON=$(jq -n \
+            --arg IMAGE "$REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:latest" \
+            '{"family": "portfolio_api_task", "containerDefinitions": [{"name": "portfolio_api_container", "image": $IMAGE, "essential": true, "memory": 512, "cpu": 256, "portMappings": [{"containerPort": 80, "hostPort": 80}]}]}')
+          echo "$TASK_DEFINITION_JSON" > task_definition.json
+          aws ecs register-task-definition --cli-input-json file://task_definition.json
+
       - name: Update ECS service
         run: |
           aws ecs update-service --cluster portfolio_api_cluster --service portfolio-api-service --task-definition portfolio_api_task --force-new-deployment
