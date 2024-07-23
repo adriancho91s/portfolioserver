@@ -47,4 +47,4 @@ jobs:
           aws-region: eu-central-1
       - name: Update ECS service
         run: |
-          aws ecs update-service --cluster portfolio_api_cluster --service portfolio_service --task-definition portfolio_api_task --force-new-deployment
+          aws ecs update-service --cluster portfolio_api_cluster --service portfolio-api-service --task-definition portfolio_api_task --force-new-deployment
