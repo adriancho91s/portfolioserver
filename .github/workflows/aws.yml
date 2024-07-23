@@ -44,7 +44,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-central-2
+          aws-region: eu-central-1
       - name: Update ECS service
         run: |
-          aws ecs update-service --cluster portfolio_api_cluster --service portfolio-api-service --task-definition portfolio_api_task --force-new-deployment
+          aws ecs update-service --cluster portfolio_api_cluster --service portfolio_api_service --task-definition portfolio_api_task --force-new-deployment
